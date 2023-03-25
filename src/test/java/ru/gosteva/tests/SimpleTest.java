@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Простые демонстрационные тесты")
 public class SimpleTest {
 
-    @Disabled("JRASERVER-41589")
+ //   @Disabled("JRASERVER-41589")
     @Test
     @DisplayName("Проверка работы метода methodEx()")
     void simpleTest() {
