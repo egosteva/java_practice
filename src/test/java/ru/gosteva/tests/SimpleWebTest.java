@@ -21,7 +21,6 @@ public class SimpleWebTest {
         Selenide.open("https://ya.ru/");
     }
 
-
     @ValueSource(strings = {
             "Selenide", "Allure"
     })
