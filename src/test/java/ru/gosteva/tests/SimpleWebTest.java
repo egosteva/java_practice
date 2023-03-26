@@ -1,10 +1,9 @@
 package ru.gosteva.tests;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Selenide.$;
@@ -12,12 +11,41 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class SimpleWebTest {
 
-    @Test
-    @DisplayName("Проверка числа результатов в поиске Яндекса")
-    void searchResultsShouldBeGreaterThanOrEqual10(){
+    @BeforeEach
+    void setup() {
         Selenide.open("https://ya.ru/");
-        $("#text").setValue("Selenide");
+    }
+
+
+    @ValueSource(strings = {
+            "Selenide", "Allure"
+    })
+    @ParameterizedTest(name = "В поисковой выдаче Яндекса дожно отображаться 10 результатов по запросу {0}")
+    @Tags({
+            @Tag("Blocker"),
+            @Tag("Web")
+    })
+    void searchResultsShouldBeGreaterThanOrEqual10(String testData) {
+        $("#text").setValue(testData);
         $("button[type='submit']").click();
         $$("li.serp-item").shouldHave(sizeGreaterThanOrEqual(10));
+    }
+
+    //   @Test
+    //   @DisplayName("В поисковой выдаче Яндекса дожно отображаться 10 результатов по запросу 'Allure'")
+    //   @Tags({
+    //          @Tag("Blocker"),
+    //          @Tag("Web")
+    //  })
+ //   @Blocker
+ //    void searchResultsShouldBeGreaterThanOrEqual10ForQueryAllure() {
+ //        $("#text").setValue("Allure");
+ //       $("button[type='submit']").click();
+ //       $$("li.serp-item").shouldHave(sizeGreaterThanOrEqual(10));
+ //    }
+
+    @Test
+    void photoSearchTest() {
+        $(".search3__icon-camera svg").click();
     }
 }
