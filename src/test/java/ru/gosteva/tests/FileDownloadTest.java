@@ -1,8 +1,6 @@
 package ru.gosteva.tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,9 +14,9 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class FileDownloadTest {
 
-  //  static {
-  //      Configuration.fileDownload = FileDownloadMode.PROXY;
-  //  }
+//  static {
+//      Configuration.fileDownload = FileDownloadMode.PROXY;
+//  }
 
 //        @Test
 //        void downloadTest() t
@@ -48,6 +46,4 @@ public class FileDownloadTest {
         $("input[type='file']").uploadFromClasspath("img/password.jpg");
         $("#js-upload-container").shouldHave(Condition.text("The upload is complete!"));
     }
-
 }
-
